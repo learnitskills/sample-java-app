@@ -1,32 +1,32 @@
-name: build app
-on:
-  push:
-    branches: [ "dev" ]
+# name: build app
+# on:
+#   push:
+#     branches: [ "dev" ]
 
-jobs:
-  deploy:
-    name: Deploy to EC2 on master branch push
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy:
+#     name: Deploy to EC2 on master branch push
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout the files
-        uses: actions/checkout@v2
+#     steps:
+#       - name: Checkout the files
+#         uses: actions/checkout@v2
 
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
+#       - name: Set up JDK 11
+#         uses: actions/setup-java@v1
+#         with:
+#           java-version: 11
 
-      - name: Build with Maven
-        run: mvn clean package
+#       - name: Build with Maven
+#         run: mvn clean package
 
-      - name: Deploy to ec2
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.TARGET_DIR }}
+#       - name: Deploy to ec2
+#         uses: easingthemes/ssh-deploy@main
+#         env:
+#           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+#           REMOTE_HOST: ${{ secrets.HOST_DNS }}
+#           REMOTE_USER: ${{ secrets.USERNAME }}
+#           TARGET: ${{ secrets.TARGET_DIR }}
 
-      # - name: run the application
-      #   run: java -jar *.war
+#       # - name: run the application
+#       #   run: java -jar *.war
