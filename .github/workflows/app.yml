@@ -27,6 +27,6 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
-
-#       # - name: run the application
-#       #   run: java -jar *.war
+      
+      - name: run the application
+        run: java -jar /home/ec2-user/sample-java-app/target/sample-0.0.1-SNAPSHOT.jar
