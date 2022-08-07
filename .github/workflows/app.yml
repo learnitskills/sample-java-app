@@ -5,7 +5,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to EC2 on master branch push
+    name: Deploy to EC2
     runs-on: ubuntu-latest
 
     steps:
@@ -35,9 +35,11 @@ jobs:
           TARGET: ${{ secrets.TARGET_DIR }}
 
       - name: running application
+        uses:  appleboy/ssh-action@master
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.TARGET_DIR }}          
-        run: java -jar ~/target/sample-0.0.1-SNAPSHOT.jar
+          TARGET: ${{ secrets.TARGET_DIR }}   
+          script: |       
+            run: java -jar ~/target/sample-0.0.1-SNAPSHOT.jar
