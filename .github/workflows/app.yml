@@ -42,4 +42,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           target: ${{ secrets.TARGET_DIR }}   
           script: |       
-            run: java -jar ~/target/sample-0.0.1-SNAPSHOT.jar
+            run: java -jar /home/ec2-user/target/sample-0.0.1-SNAPSHOT.jar
