@@ -36,3 +36,4 @@ jobs:
           username: ${{ secrets.USERNAME }} 
           script: |       
             nohup java -jar ~/target/sample-0.0.1-SNAPSHOT.jar > /dev/null &
+##
