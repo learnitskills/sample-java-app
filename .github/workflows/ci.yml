@@ -1,0 +1,31 @@
+name: CI/Release Workflow
+
+on:
+  push:
+    branches:
+    - container
+
+jobs:
+  build_and_push:
+    name: Build, Test, and Push Docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Build with Maven
+        run:  mvn clean package
+
+      - name: Setup Docker build
+        uses: docker/setup-buildx-action@v1
+
+      - name: Docker Build
+        run: |
+          echo "${{ secrets.PASSWD }}" | docker login -u "deploymentset" --password-stdin
+          docker image build -t deploymentset/testing:v1 .
+          docker push deploymentset/testing:v1
